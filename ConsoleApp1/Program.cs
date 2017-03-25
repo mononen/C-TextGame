@@ -10,6 +10,9 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("welcome to the game! I hope you enjoy in some way!");
+            Console.WriteLine("type 'I'm ready!' to begin");
+            ConsoleKeyInfo Input = Console.ReadKey();
         }
     }
 }
