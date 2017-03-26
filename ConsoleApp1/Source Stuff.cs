@@ -152,7 +152,7 @@ namespace StatusStuff
                 Inventory.bottle = true;
                 Inventory.flashlight = true;
                 Inventory.rug = true;
-                DarkBasement.desc();
+                //DarkBasement.desc();
             }
             if (KeyIn.Equals("ilightbasement"))
             {
@@ -161,7 +161,7 @@ namespace StatusStuff
                 Inventory.bottle = true;
                 Inventory.flashlight = true;
                 Inventory.rug = true;
-                LightBasement.desc();
+              //  LightBasement.desc();
             }
             if (KeyIn.Equals("in1"))
             {
@@ -170,7 +170,7 @@ namespace StatusStuff
                 Inventory.bottle = true;
                 Inventory.flashlight = true;
                 Inventory.rug = true;
-                N1.desc();
+               // N1.desc();
 
             }
             if (KeyIn.Equals("inymph1"))
@@ -182,7 +182,7 @@ namespace StatusStuff
                 Inventory.rug = true;
                 Inventory.Nmm = true;
                 Inventory.FlareGun = true;
-                Nymph1.battle();
+               // Nymph1.battle();
             }
             else
             {
@@ -202,5 +202,17 @@ namespace StatusStuff
             String Parsed = Input.ToLower();
             return Parsed;
         }
+    }
+    class Label
+    {
+        public static String BL = "BEDROOM";
+        public static String KL = "KITCHEN";
+        public static String TD = "TRAPDOOR";
+        public static String CL = "CLOSET";
+        public static String BA = "DARK BASEMENT";
+        public static String LB = "LIGHT BASEMENT";
+        public static String TUNNEL = "TUNNEL";
+        public static String CART = "CART";
+        public static String RIVER = "RIVER";
     }
 }
