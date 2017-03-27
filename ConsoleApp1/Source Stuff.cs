@@ -77,14 +77,17 @@ namespace StatusStuff
     {
         public static String k1 = "You enter an old dilapidated kitchen, there is a flask on the countertop. There is a door to your east";
         public static String k2 = "You are still in the old dilapated kitchen. There is a door to your east.";
-        public static String b1 = "You enter a dark and nearly empty bedroom with a table in the middle and a bed pushed to the side. There is a small closed door to the left. A large oriental rug adorns the floor. On the table in the center of the room is a bottle and a wool sack.";
-        public static String b2 = "You are in a dark and nearly empty bedroom with a table in the middle and a bed pushed to the side. There is a small closed door to the left. A large oriental rug adorns the floor. On the table in the center of the room is a wool sack.";
-        public static String b3 = "You are in a dark and nearly empty bedroom with a table in the middle and a bed pushed to the side. There is a small closed door to the left. A large oriental rug adorns the floor. On the table in the center of the room is a flask.";
-        public static String b4 = "You enter a dark and nearly empty bedroom with a table in the middle and a bed pushed to the side. There is a small closed door to the left. A large oriental rug adorns the floor.";
-        public static String rug = "You remove the rug off the ground revealing a trap door.";
-        public static String c1 = "You open the door, it is a small closet, there is a flashlight.";
-        public static String c2 = "You look inside the closet, it is empty.";
-        public static String ba1 = "You are in the basement. It is very dark";
+        //b1 - b4 are all different variants of the bedroom description text
+        public static String b1 = "You enter a dark and nearly empty bedroom with a table in the middle and a bed pushed to the side. There is a small closed door to the left. On the table in the center of the room is a bottle and a wool sack.";
+        public static String b2 = "You are in a dark and nearly empty bedroom with a table in the middle and a bed pushed to the side. There is a small closed door to the left. On the table in the center of the room is a wool sack.";
+        public static String b3 = "You are in a dark and nearly empty bedroom with a table in the middle and a bed pushed to the side. There is a small closed door to the left. On the table in the center of the room is a flask.";
+        public static String b4 = "You enter a dark and nearly empty bedroom with a table in the middle and a bed pushed to the side. There is a small closed door to the left.";
+        //c1 - c2 are all different variants of the closet description text
+        public static String c1 = "You are in a small closet, there is a flashlight, and a small rug on the floor.";
+        public static String c2 = "You are in a small closet, there is a small rug on the floor.";
+        public static String c3 = "You are in a small closet, there is a rug moved out of the way, revealing a trapdoor.";
+        public static String c4 = "You are in a small closet, there is a flashilight and there is a rug moved out of the way, revealing a trapdoor.";
+        public static String bd1 = "You are in the basement. It is very dark";
         public static String bl1 = "You finally see the basement clearly. There is a passage to the South and a passage to the North, you feel a slight breeze coming from the one to the North. The whole region is built out of raw concrete, and it looks very industrial. A gun lies on the desk to your left. Two magazines lie next to it.";
         public static String bl1Empty = "You finally see the basement clearly. There is a passage  to the South and a passage to the North, you feel a slight breeze coming from the one to the North. The whole region is built out of raw concrete and it looks very industrial.";
         public static String N1 = "The tunnel streatches beofore you. There is a old mining cart sitting on some abandoned tracks. Next to the tracks it says: Death to all who enter. A package of flares lie next to an open hole with spikes at the bottom. You see a skeleton hanging limply on one of the spikes. A flare gun lies on the ground just outside of the pit.";
@@ -196,7 +199,7 @@ namespace StatusStuff
         public static string getInput()
         {
             //prints cursor
-            Console.WriteLine("> ");
+            Console.Write("> ");
             string SysIn = Console.ReadLine();
             String Input = SysIn;
             String Parsed = Input.ToLower();
@@ -209,7 +212,7 @@ namespace StatusStuff
         public static String KL = "KITCHEN";
         public static String TD = "TRAPDOOR";
         public static String CL = "CLOSET";
-        public static String BA = "DARK BASEMENT";
+        public static String BD = "DARK BASEMENT";
         public static String LB = "LIGHT BASEMENT";
         public static String TUNNEL = "TUNNEL";
         public static String CART = "CART";
