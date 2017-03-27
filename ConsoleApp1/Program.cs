@@ -192,7 +192,7 @@ namespace Game
                 }
                 else if(KeyIn.Equals("enter") && HasVisit.trapdoor)
                 {
-                    AboveGround.Basement();
+                    UnderGround.Basement();
                 }
                 else if(KeyIn.Equals("look") || KeyIn.Equals("look around"))
                 {
@@ -236,6 +236,9 @@ namespace Game
                 }
             }
         }
+    }
+    class UnderGround
+    {
         public static void Basement()
         {
             if (HasVisit.basement)
