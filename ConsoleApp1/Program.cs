@@ -488,6 +488,7 @@ namespace Game
         }
         public static void Cart()
         {
+            //already in the minecart, function only meant for pulling the lever.
             while (RunStat.IsRunning && Inventory.Php > 0)
             {
                 if (HasVisit.cart)
@@ -500,7 +501,63 @@ namespace Game
                 }
                 String KeyIn = Input.getInput();
                 String Parsed = Input.Parser(KeyIn);
+                if(KeyIn.Equals("pull lever") || KeyIn.Equals("lever") || KeyIn.Equals("go"))
+                {
 
+                    Nymph1();
+                }
+                else if(KeyIn.Equals("get out") || KeyIn.Equals("exit"))
+                {
+                    N1();
+                }
+                else if (Parsed.Equals("look"))
+                {
+                    Console.WriteLine(Desc.cartIn);
+                }
+                else if (Parsed.Equals("has visit"))
+                {
+                    HasVisit.Print();
+                }
+                else if (Parsed.Equals("inv"))
+                {
+                    Inventory.ItemStatusPrint();
+                }
+                else if (Parsed.Equals("quit"))
+                {
+                    RunStat.IsRunning = false;
+                }
+                else if (Parsed.Equals("clr"))
+                {
+                    Console.Clear();
+                    GC.Collect();
+                }
+                else if (Parsed.Equals("back"))
+                {
+                    N1();
+                }
+                else
+                {
+                    Console.WriteLine("You find yourself staring at the red lever");
+                }
+
+            }
+        }
+        public static void Nymph1()
+        {
+            Console.WriteLine(Desc.river);
+            String KeyIn = Input.getInput();
+            String Parsed = Input.Parser(KeyIn);
+            if (KeyIn.Equals("attack"))
+            {
+                FightSet.Fight(Inventory.Nymph1HP, Inventory.Nymph1DMG, "River Nymph");
+            }
+            else if(KeyIn.Equals("run") || KeyIn.Equals("run away"))
+            {
+                Console.WriteLine("There is nowhere to run!");
+            }
+            else
+            {
+                Console.WriteLine("You are being stared down by a nymph with a sword in her hand, and you want to do that!");
             }
         }
     }
