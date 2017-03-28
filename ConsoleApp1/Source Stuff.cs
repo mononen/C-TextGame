@@ -217,6 +217,48 @@ namespace StatusStuff
             String Parsed = Input.ToLower();
             return Parsed;
         }
+        //general parsing
+        //not to process anything specific
+        public static String Parser(String KeyIn)
+        {
+            if (KeyIn.Equals("go south") || KeyIn.Equals("south"))
+            {
+                return "south";
+            }
+            else if (KeyIn.Equals("go east") || KeyIn.Equals("east"))
+            {
+                return "east";
+            }
+            else if (KeyIn.Equals("go north") || KeyIn.Equals("north"))
+            {
+                return "north";
+            }
+            else if (KeyIn.Equals("look") || KeyIn.Equals("look around"))
+            {
+                return "look";
+            }
+            else if (KeyIn.Equals("quit") || KeyIn.Equals("end"))
+            {
+                return "quit";
+            }
+            else if (KeyIn.Equals("look around") || KeyIn.Equals("look"))
+            {
+                return "has been";
+            }
+            else if (KeyIn.Equals("inventory") || KeyIn.Equals("inv"))
+            {
+                return "inv";
+            }
+            else if (KeyIn.Equals("clear") || KeyIn.Equals("clr"))
+            {
+                return "clr";
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
     class Label
     {

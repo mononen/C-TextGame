@@ -18,10 +18,11 @@ namespace Game
                 Console.WriteLine("Simple Instructions:");
                 Console.WriteLine("Type 'quit' at any time to quit.");
                 Console.WriteLine("Type 'inventory' at any time to see what items you possess.");
-                Console.WriteLine("type 'look around' at any time to see what is around you.");
+                Console.WriteLine("Type 'look around' at any time to see what is around you.");
                 Console.WriteLine("Type 'has been' to at any time to see where you have been so far.");
-                Console.WriteLine("type 'back' to return to the previous room (if you can)");
-                Console.WriteLine("type 'potatoes' to begin");
+                Console.WriteLine("Type 'back' to return to the previous room (if you can)");
+                Console.WriteLine("Type 'clear' to clear the console.");
+                Console.WriteLine("Type 'potatoes' to begin");
                 String KeyIn = Input.getInput();
                 if (KeyIn.Equals("potatoes"))
                 {
@@ -56,30 +57,35 @@ namespace Game
                 }
                 HasVisit.kitchen = true;
                 String KeyIn = Input.getInput();
+                String Parsed = Input.Parser(KeyIn);
                 if(KeyIn.Equals("take flask"))
                 {
                     Console.WriteLine("you take the flask");
                     Inventory.flask = true;
                     AboveGround.Kitchen();
                 }
-                else if(KeyIn.Equals("go east"))
+                else if(Parsed.Equals("east"))
                 {
                     AboveGround.Bedroom();
                 }
-                else if(KeyIn.Equals("look") || KeyIn.Equals("look around"))
+                else if(Parsed.Equals("look"))
                 {
                     Console.WriteLine(Desc.k1);
                 }
-                else if(KeyIn.Equals("quit") || KeyIn.Equals("end")){
+                else if(Parsed.Equals("quit"){
                     RunStat.IsRunning = false;
                 }
-                else if(KeyIn.Equals("has been"))
+                else if(Parsed.Equals("has been"))
                 {
                     HasVisit.Print();
                 }
-                else if (KeyIn.Equals("inventory"))
+                else if (Parsed.Equals("inv")
                 {
                     Inventory.ItemStatusPrint();
+                }
+                else if(Parsed.Equals("clr"))
+                {
+                    Console.Clear();
                 }
                 else
                 {
@@ -151,6 +157,10 @@ namespace Game
                 else if(KeyIn.Equals("go back") || KeyIn.Equals("back") || KeyIn.Equals("go west"))
                 {
                     AboveGround.Kitchen();
+                }
+                else if(KeyIn.Equals("clear"))
+                {
+                    Console.Clear();
                 }
                 else
                 {
@@ -229,6 +239,10 @@ namespace Game
                 {
                     Bedroom();
                 }
+                else if(KeyIn.Equals("clear"))
+                {
+                    Console.Clear();
+                }
                 else
                 {
                     Console.WriteLine("You look around confused.");
@@ -270,6 +284,10 @@ namespace Game
             {
                 Console.WriteLine(Desc.bdt);
             }
+            else if(KeyIn.Equals("clear"))
+            {
+                Console.Clear();
+            }
             else
             {
                 Console.WriteLine("You look around confused");
@@ -278,78 +296,106 @@ namespace Game
         }
         public static void LightBasement()
         {
-            if (HasVisit.basement)
-            {
-                Console.WriteLine(Label.BASEMENT);
-            }
-            else
-            {
-                Console.WriteLine(Desc.bl1);
-            }
-            String KeyIn = Input.getInput();
-            if (KeyIn.Equals("take gun") || KeyIn.Equals("take pistol") || KeyIn.Equals("gun"))
-            {
-                Inventory.Nmm = true;
-                Console.WriteLine("You pick up a 9mm handgun");
-                LightBasement();
-            }
-            else if (KeyIn.Equals("take magazines") || KeyIn.Equals("magazines") || KeyIn.Equals("magazine") || KeyIn.Equals("take magazine") || KeyIn.Equals("take ammo") || KeyIn.Equals("ammo"))
-            {
-                if (Inventory.NmmRBasementTaken)
+            while(RunStat.IsRunning){
+                if (HasVisit.basement)
                 {
-                    Console.WriteLine("There are no magazines here to take!");
-                }
-                else
-                {
-                    Inventory.NmmRBasementTaken = true;
-                    Inventory.NmmR = Inventory.NmmR + 16;
-                    Console.WriteLine("You take 2 magazines that each contain 8 bullets.");
-                }
-                LightBasement();
-            }
-            else if (KeyIn.Equals("go south") || KeyIn.Equals("south"))
-            {
-                //S1();
-            }else if(KeyIn.Equals("go north") || KeyIn.Equals("north"))
-            {
-                //N1();
-            }
-            else if(KeyIn.Equals("look") || KeyIn.Equals("look around"))
-            {
-                if (Inventory.NmmBasementTaken)
-                {
-                    Console.WriteLine(Desc.bl1Empty);
+                    Console.WriteLine(Label.BASEMENT);
                 }
                 else
                 {
                     Console.WriteLine(Desc.bl1);
                 }
-                LightBasement();
+                String KeyIn = Input.getInput();
+                if (KeyIn.Equals("take gun") || KeyIn.Equals("take pistol") || KeyIn.Equals("gun"))
+                {
+                    Inventory.Nmm = true;
+                    Console.WriteLine("You pick up a 9mm handgun");
+                    LightBasement();
+                }
+                else if (KeyIn.Equals("take magazines") || KeyIn.Equals("magazines") || KeyIn.Equals("magazine") || KeyIn.Equals("take magazine") || KeyIn.Equals("take ammo") || KeyIn.Equals("ammo") || KeyIn.Equals("take mags") || KeyIn.Equals("mags"))
+                {
+                    if (Inventory.NmmRBasementTaken)
+                    {
+                        Console.WriteLine("There are no magazines here to take!");
+                    }
+                    else
+                    {
+                        Inventory.NmmRBasementTaken = true;
+                        Inventory.NmmR = Inventory.NmmR + 16;
+                        Console.WriteLine("You take 2 magazines that each contain 8 bullets.");
+                    }
+                    LightBasement();
+                }
+                else if (KeyIn.Equals("go south") || KeyIn.Equals("south"))
+                {
+                    //S1();
+                }else if(KeyIn.Equals("go north") || KeyIn.Equals("north"))
+                {
+                    //N1();
+                }
+                else if(KeyIn.Equals("look") || KeyIn.Equals("look around"))
+                {
+                    if (Inventory.NmmBasementTaken)
+                    {
+                        Console.WriteLine(Desc.bl1Empty);
+                    }
+                    else
+                    {
+                        Console.WriteLine(Desc.bl1);
+                    }
+                    LightBasement();
+                }
+                else if (KeyIn.Equals("quit") || KeyIn.Equals("end"))
+                {
+                    RunStat.IsRunning = false;
+                }
+                else if(KeyIn.Equals("go back") || KeyIn.Equals("back"))
+                {
+                    Console.WriteLine(Desc.bdt);
+                }
+                else if(KeyIn.Equals("has been"))
+                {
+                    HasVisit.Print();
+                }
+                else if (KeyIn.Equals("inventory"))
+                {
+                    Inventory.ItemStatusPrint();
+                    LightBasement();
+                }
+                else if(KeyIn.Equals("clear"))
+                {
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.WriteLine("You look around confused");
+                    LightBasement();
+                }
             }
-            else if (KeyIn.Equals("quit") || KeyIn.Equals("end"))
+        }
+        public static void N1()
+        {
+            while(RunStat.IsRunning)
             {
-                RunStat.IsRunning = false;
-            }
-            else if(KeyIn.Equals("go back") || KeyIn.Equals("back"))
-            {
-                Console.WriteLine(Desc.bdt);
-            }
-            else if(KeyIn.Equals("has been"))
-            {
-                HasVisit.Print();
-            }
-            else if (KeyIn.Equals("inventory"))
-            {
-                Inventory.ItemStatusPrint();
-                LightBasement();
-            }
-            else
-            {
-                Console.WriteLine("You look around confused");
-                LightBasement();
+                if (HasVisit.N1)
+                {
+                    Console.WriteLine(Label.TUNNEL);
+                }
+                else
+                {
+                    if (Inventory.flareN1Taken)
+                    {
+                        Console.WriteLine(Desc.N1Empty);
+                    }
+                    Console.WriteLine(Desc.N1);
+                }
+                HasVisit.N1 = true;
+                String KeyIn = Input.getInput();
+
             }
         }
     }
+    //fighting system and interface
     class FightSet
     {
         public static Boolean Fight(int TargetHP, int TargetDMG, String TargetName)
@@ -413,6 +459,7 @@ namespace Game
                             Inventory.Flare = Inventory.Flare - 1;
                             //resets the burn timer
                             BurnCount = 2;
+                            HasUsedFlare = true;
                             //subtracts the target's hp
                             TargetHP = TargetHP - Inventory.FlareDOT;
                             //tells you that the target attacked
