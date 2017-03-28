@@ -18,6 +18,13 @@ namespace StatusStuff
         public static Boolean bottle = false;
         public static Boolean flashlight = false;
         public static Boolean rug = false;
+        //if you have taken the item from the location
+        public static Boolean FlaskKitchen = false;
+        public static Boolean SackBedroom = false;
+        public static Boolean BottleBedroom = false;
+        public static Boolean FlashlightCloset = true;
+        public static Boolean RugCloset = true;
+
         //nmm is the 9mm hand gun
         public static Boolean Nmm = false;
         //gun dmg
@@ -32,6 +39,7 @@ namespace StatusStuff
         public static int Flare = 0;
         //if you have taken the objects from these locations
         public static Boolean flareN1Taken = false;
+        public static Boolean FlareGunN1Taken = false;
         public static Boolean NmmBasementTaken = false;
         public static Boolean NmmRBasementTaken = false;
 
@@ -233,6 +241,10 @@ namespace StatusStuff
             {
                 return "north";
             }
+            else if (KeyIn.Equals("go west") || KeyIn.Equals("west"))
+            {
+                return "west";
+            }
             else if (KeyIn.Equals("look") || KeyIn.Equals("look around"))
             {
                 return "look";
@@ -252,6 +264,10 @@ namespace StatusStuff
             else if (KeyIn.Equals("clear") || KeyIn.Equals("clr"))
             {
                 return "clr";
+            }
+            else if (KeyIn.Equals("back") || KeyIn.Equals("go back"))
+            {
+                return "back";
             }
             else
             {

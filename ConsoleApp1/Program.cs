@@ -60,9 +60,16 @@ namespace Game
                 String Parsed = Input.Parser(KeyIn);
                 if(KeyIn.Equals("take flask"))
                 {
-                    Console.WriteLine("you take the flask");
-                    Inventory.flask = true;
-                    AboveGround.Kitchen();
+                    if (Inventory.FlaskKitchen)
+                    {
+                        Console.WriteLine("There isn't a flask here to take!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("you take the flask");
+                        Inventory.flask = true;
+                        AboveGround.Kitchen();
+                    }
                 }
                 else if(Parsed.Equals("east"))
                 {
@@ -72,20 +79,21 @@ namespace Game
                 {
                     Console.WriteLine(Desc.k1);
                 }
-                else if(Parsed.Equals("quit"){
+                else if(Parsed.Equals("quit")){
                     RunStat.IsRunning = false;
                 }
                 else if(Parsed.Equals("has been"))
                 {
                     HasVisit.Print();
                 }
-                else if (Parsed.Equals("inv")
+                else if (Parsed.Equals("inv"))
                 {
                     Inventory.ItemStatusPrint();
                 }
                 else if(Parsed.Equals("clr"))
                 {
                     Console.Clear();
+                    GC.Collect();
                 }
                 else
                 {
@@ -108,23 +116,38 @@ namespace Game
                 }
                 HasVisit.bedroom = true;
                 String KeyIn = Input.getInput();
+                String Parsed = Input.Parser(KeyIn);
                 if (KeyIn.Equals("take bottle"))
                 {
-                    Console.WriteLine("You take the bottle");
-                    Inventory.bottle = true;
-                    AboveGround.Bedroom();
+                    if (Inventory.FlareGunN1Taken)
+                    {
+                        Console.WriteLine("There isn't a flare gun here to take!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You take the bottle");
+                        Inventory.bottle = true;
+                        AboveGround.Bedroom();
+                    }
                 }
                 else if(KeyIn.Equals("take bag") || KeyIn.Equals("take sack") || KeyIn.Equals("take wool sack"))
                 {
-                    Console.WriteLine("You take the wool sack");
-                    Inventory.sack = true;
-                    AboveGround.Bedroom();
+                    if (Inventory.FlareGunN1Taken)
+                    {
+                        Console.WriteLine("There isn't a flare gun here to take!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You take the wool sack");
+                        Inventory.sack = true;
+                        AboveGround.Bedroom();
+                    }
                 }
                 else if (KeyIn.Equals("go left"))
                 {
                     AboveGround.Closet();
                 }
-                else if (KeyIn.Equals("look") || KeyIn.Equals("look around"))
+                else if (Parsed.Equals("look"))
                 {
                     if (Inventory.bottle)
                     {
@@ -143,24 +166,25 @@ namespace Game
                         Console.WriteLine(Desc.b1);
                     }
                 }
-                else if (KeyIn.Equals("quit") || KeyIn.Equals("end")){
+                else if (Parsed.Equals("quit")){
                     RunStat.IsRunning = false;
                 }
-                else if (KeyIn.Equals("has been"))
+                else if (Parsed.Equals("has been"))
                 {
                     HasVisit.Print();
                 }
-                else if (KeyIn.Equals("inventory"))
+                else if (Parsed.Equals("inv"))
                 {
                     Inventory.ItemStatusPrint();
                 }
-                else if(KeyIn.Equals("go back") || KeyIn.Equals("back") || KeyIn.Equals("go west"))
+                else if(Parsed.Equals("back") || Parsed.Equals("west"))
                 {
                     AboveGround.Kitchen();
                 }
                 else if(KeyIn.Equals("clear"))
                 {
                     Console.Clear();
+                    GC.Collect();
                 }
                 else
                 {
@@ -183,11 +207,19 @@ namespace Game
                 }
                 HasVisit.closet = true;
                 String KeyIn = Input.getInput();
+                String Parsed = Input.Parser(KeyIn);
                 if (KeyIn.Equals("take flashlight") || KeyIn.Equals("flashlight") || KeyIn.Equals("take flash light"))
                 {
-                    Console.WriteLine("You take the flashlight");
-                    Inventory.flashlight = true;
-                    Closet();
+                    if (Inventory.FlareGunN1Taken)
+                    {
+                        Console.WriteLine("There isn't a flare gun here to take!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You take the flashlight");
+                        Inventory.flashlight = true;
+                        Closet();
+                    }
                 }
                 else if(KeyIn.Equals("take rug"))
                 {
@@ -223,25 +255,26 @@ namespace Game
                         Console.WriteLine(Desc.c1);
                     }
                 }
-                else if (KeyIn.Equals("quit") || KeyIn.Equals("end"))
+                else if (Parsed.Equals("quit"))
                 {
                     RunStat.IsRunning = false;
                 }
-                else if (KeyIn.Equals("has been"))
+                else if (Parsed.Equals("has been"))
                 {
                     HasVisit.Print();
                 }
-                else if (KeyIn.Equals("inventory"))
+                else if (Parsed.Equals("inv"))
                 {
                     Inventory.ItemStatusPrint();
                 }
-                else if (KeyIn.Equals("go back") || KeyIn.Equals("back") || KeyIn.Equals("go west"))
+                else if (Parsed.Equals("back"))
                 {
                     Bedroom();
                 }
-                else if(KeyIn.Equals("clear"))
+                else if(Parsed.Equals("clr"))
                 {
                     Console.Clear();
+                    GC.Collect();
                 }
                 else
                 {
@@ -264,29 +297,31 @@ namespace Game
                 Console.WriteLine(Desc.bd1);
             }
             String KeyIn = Input.getInput();
+            String Parsed = Input.Parser(KeyIn);
             if (KeyIn.Equals("turn on flashlight") || KeyIn.Equals("flashlight"))
             {
                 UnderGround.LightBasement();
             }
-            else if (KeyIn.Equals("quit"))
+            else if (Parsed.Equals("quit"))
             {
                 RunStat.IsRunning = false;
             }
-            else if(KeyIn.Equals("has been"))
+            else if(Parsed.Equals("has been"))
             {
                 HasVisit.Print();
             }
-            else if (KeyIn.Equals("inventory") || KeyIn.Equals("inv"))
+            else if (Parsed.Equals("inv"))
             {
                 Inventory.ItemStatusPrint();
             }
-            else if(KeyIn.Equals("go back") || KeyIn.Equals("back"))
+            else if(Parsed.Equals("back"))
             {
                 Console.WriteLine(Desc.bdt);
             }
-            else if(KeyIn.Equals("clear"))
+            else if(Parsed.Equals("clr"))
             {
                 Console.Clear();
+                GC.Collect();
             }
             else
             {
@@ -306,6 +341,7 @@ namespace Game
                     Console.WriteLine(Desc.bl1);
                 }
                 String KeyIn = Input.getInput();
+                String Parsed = Input.Parser(KeyIn);
                 if (KeyIn.Equals("take gun") || KeyIn.Equals("take pistol") || KeyIn.Equals("gun"))
                 {
                     Inventory.Nmm = true;
@@ -326,14 +362,15 @@ namespace Game
                     }
                     LightBasement();
                 }
-                else if (KeyIn.Equals("go south") || KeyIn.Equals("south"))
+                else if (Parsed.Equals("south"))
                 {
                     //S1();
-                }else if(KeyIn.Equals("go north") || KeyIn.Equals("north"))
-                {
-                    //N1();
                 }
-                else if(KeyIn.Equals("look") || KeyIn.Equals("look around"))
+                else if(Parsed.Equals("north"))
+                {
+                    N1();
+                }
+                else if(Parsed.Equals("look"))
                 {
                     if (Inventory.NmmBasementTaken)
                     {
@@ -343,28 +380,28 @@ namespace Game
                     {
                         Console.WriteLine(Desc.bl1);
                     }
-                    LightBasement();
                 }
-                else if (KeyIn.Equals("quit") || KeyIn.Equals("end"))
+                else if (Parsed.Equals("quit"))
                 {
                     RunStat.IsRunning = false;
                 }
-                else if(KeyIn.Equals("go back") || KeyIn.Equals("back"))
+                else if(Parsed.Equals("back"))
                 {
                     Console.WriteLine(Desc.bdt);
                 }
-                else if(KeyIn.Equals("has been"))
+                else if(Parsed.Equals("has been"))
                 {
                     HasVisit.Print();
                 }
-                else if (KeyIn.Equals("inventory"))
+                else if (Parsed.Equals("inv"))
                 {
                     Inventory.ItemStatusPrint();
                     LightBasement();
                 }
-                else if(KeyIn.Equals("clear"))
+                else if(Parsed.Equals("clr"))
                 {
                     Console.Clear();
+                    GC.Collect();
                 }
                 else
                 {
@@ -383,14 +420,86 @@ namespace Game
                 }
                 else
                 {
-                    if (Inventory.flareN1Taken)
-                    {
-                        Console.WriteLine(Desc.N1Empty);
-                    }
                     Console.WriteLine(Desc.N1);
                 }
                 HasVisit.N1 = true;
                 String KeyIn = Input.getInput();
+                String Parsed = Input.Parser(KeyIn);
+                if (KeyIn.Equals("mining cart") || KeyIn.Equals("cart") || KeyIn.Equals("minecart") || KeyIn.Equals("get in mining cart") || KeyIn.Equals("get in minecart"))
+                {
+                    Cart();
+                }
+                else if (KeyIn.Equals("take flares") || KeyIn.Equals("flares") || KeyIn.Equals("flare"))
+                {
+                    if (Inventory.flareN1Taken)
+                    {
+                        Console.WriteLine("There are no magazines here to take!");
+                    }
+                    else
+                    {
+                        Inventory.flareN1Taken = true;
+                        Inventory.Flare = Inventory.Flare + 2;
+                        Console.WriteLine("You take two flares.");
+                    }
+                }
+                else if (KeyIn.Equals("take flare gun") || KeyIn.Equals("flare gun"))
+                {
+                    if (Inventory.FlareGunN1Taken)
+                    {
+                        Console.WriteLine("There isn't a flare gun here to take!");
+                    }
+                    else
+                    {
+                        Inventory.FlareGunN1Taken = true;
+                        Inventory.FlareGun = true;
+                        Console.WriteLine("You take the flare gun.");
+                    }
+                }
+                else if (Parsed.Equals("look"))
+                {
+                    Console.WriteLine(Desc.N1Empty);
+                }
+                else if (Parsed.Equals("has visit"))
+                {
+                    HasVisit.Print();
+                }
+                else if (Parsed.Equals("inv"))
+                {
+                    Inventory.ItemStatusPrint();
+                }
+                else if (Parsed.Equals("quit"))
+                {
+                    RunStat.IsRunning = false;
+                }
+                else if (Parsed.Equals("clr"))
+                {
+                    Console.Clear();
+                    GC.Collect();
+                }
+                else if (Parsed.Equals("back"))
+                {
+                    LightBasement();
+                }
+                else
+                {
+                    Console.WriteLine("You find yourself staring at the mine cart");
+                }
+            }
+        }
+        public static void Cart()
+        {
+            while (RunStat.IsRunning && Inventory.Php > 0)
+            {
+                if (HasVisit.cart)
+                {
+                    Console.WriteLine(Label.CART);
+                }
+                else
+                {
+                    Console.WriteLine(Desc.cart);
+                }
+                String KeyIn = Input.getInput();
+                String Parsed = Input.Parser(KeyIn);
 
             }
         }
@@ -491,6 +600,7 @@ namespace Game
                     Console.WriteLine("You stand distracted, and nearly get hit!");
                 }
             }
+            GC.Collect();
             return true;
         }
     }
