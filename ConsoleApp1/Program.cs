@@ -192,7 +192,7 @@ namespace Game
                 }
                 else if(KeyIn.Equals("enter") && HasVisit.trapdoor)
                 {
-                    UnderGround.Basement();
+                    UnderGround.DarkBasement();
                 }
                 else if(KeyIn.Equals("look") || KeyIn.Equals("look around"))
                 {
@@ -239,17 +239,212 @@ namespace Game
     }
     class UnderGround
     {
-        public static void Basement()
+        public static void DarkBasement()
         {
             if (HasVisit.basement)
             {
-                Console.WriteLine(Label.BD);
+                Console.WriteLine(Label.BASEMENT);
             }
             else
             {
                 Console.WriteLine(Desc.bd1);
             }
+            String KeyIn = Input.getInput();
+            if (KeyIn.Equals("turn on flashlight") || KeyIn.Equals("flashlight"))
+            {
+                UnderGround.LightBasement();
+            }
+            else if (KeyIn.Equals("quit"))
+            {
+                RunStat.IsRunning = false;
+            }
+            else if(KeyIn.Equals("has been"))
+            {
+                HasVisit.Print();
+            }
+            else if (KeyIn.Equals("inventory") || KeyIn.Equals("inv"))
+            {
+                Inventory.ItemStatusPrint();
+            }
+            else if(KeyIn.Equals("go back") || KeyIn.Equals("back"))
+            {
+                Console.WriteLine(Desc.bdt);
+            }
+            else
+            {
+                Console.WriteLine("You look around confused");
+                DarkBasement();
+            }
+        }
+        public static void LightBasement()
+        {
+            if (HasVisit.basement)
+            {
+                Console.WriteLine(Label.BASEMENT);
+            }
+            else
+            {
+                Console.WriteLine(Desc.bl1);
+            }
+            String KeyIn = Input.getInput();
+            if (KeyIn.Equals("take gun") || KeyIn.Equals("take pistol") || KeyIn.Equals("gun"))
+            {
+                Inventory.Nmm = true;
+                Console.WriteLine("You pick up a 9mm handgun");
+                LightBasement();
+            }
+            else if (KeyIn.Equals("take magazines") || KeyIn.Equals("magazines") || KeyIn.Equals("magazine") || KeyIn.Equals("take magazine") || KeyIn.Equals("take ammo") || KeyIn.Equals("ammo"))
+            {
+                if (Inventory.NmmRBasementTaken)
+                {
+                    Console.WriteLine("There are no magazines here to take!");
+                }
+                else
+                {
+                    Inventory.NmmRBasementTaken = true;
+                    Inventory.NmmR = Inventory.NmmR + 16;
+                    Console.WriteLine("You take 2 magazines that each contain 8 bullets.");
+                }
+                LightBasement();
+            }
+            else if (KeyIn.Equals("go south") || KeyIn.Equals("south"))
+            {
+                //S1();
+            }else if(KeyIn.Equals("go north") || KeyIn.Equals("north"))
+            {
+                //N1();
+            }
+            else if(KeyIn.Equals("look") || KeyIn.Equals("look around"))
+            {
+                if (Inventory.NmmBasementTaken)
+                {
+                    Console.WriteLine(Desc.bl1Empty);
+                }
+                else
+                {
+                    Console.WriteLine(Desc.bl1);
+                }
+                LightBasement();
+            }
+            else if (KeyIn.Equals("quit") || KeyIn.Equals("end"))
+            {
+                RunStat.IsRunning = false;
+            }
+            else if(KeyIn.Equals("go back") || KeyIn.Equals("back"))
+            {
+                Console.WriteLine(Desc.bdt);
+            }
+            else if(KeyIn.Equals("has been"))
+            {
+                HasVisit.Print();
+            }
+            else if (KeyIn.Equals("inventory"))
+            {
+                Inventory.ItemStatusPrint();
+                LightBasement();
+            }
+            else
+            {
+                Console.WriteLine("You look around confused");
+                LightBasement();
+            }
         }
     }
-    
+    class FightSet
+    {
+        public static Boolean Fight(int TargetHP, int TargetDMG, String TargetName)
+        {
+            if(TargetHP < 0)
+            {
+                Console.WriteLine("The " + TargetName + " falls over, dead.");
+            }
+            while (TargetHP > 0 && RunStat.IsRunning && Inventory.Php > 0)
+            {
+                Boolean HasUsedFlare = false;
+                int BurnCount = 0;
+                Console.WriteLine("Attack with what?");
+                String KeyIn = Input.getInput();
+                if (KeyIn.Equals("attack with 9mm") || KeyIn.Equals("9mm") || KeyIn.Equals("pistol") || KeyIn.Equals("gun"))
+                {
+                    if (Inventory.Nmm)
+                    {
+                        if (Inventory.NmmR > 0)
+                        {
+                            //takes away ammo
+                            Inventory.NmmR = Inventory.NmmR - 1;
+                            //flare DOT counter
+                            if (HasUsedFlare && BurnCount > 0)
+                            {
+                                TargetHP = TargetHP - Inventory.NmmDmg - Inventory.FlareDOT;
+                                BurnCount--;
+                            }
+                            else
+                            {
+                                TargetHP = TargetHP - Inventory.NmmDmg;
+                            }
+                            //tells you that the target attacked
+                            Console.WriteLine("the " + TargetName + " retaliates to your blow!");
+                            //subtracts your hp
+                            Inventory.Php = Inventory.Php - TargetDMG;
+                            //tells you your hp
+                            Console.WriteLine("You have " + Inventory.Php + " hp left.");
+                            //tells you the target's hp
+                            Console.WriteLine("The " + TargetName + " has " + TargetHP + "hp left");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The gun clicks uselessly!");
+                            Console.WriteLine("You don't have any more bullets!");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("You don't have one of those!");
+                    }
+                }
+                else if (KeyIn.Equals("attack with flare gun") || KeyIn.Equals("attack with flare") || KeyIn.Equals("flare") || KeyIn.Equals("flare gun"))
+                {
+                    //checks if you have a flare gun
+                    if (Inventory.FlareGun)
+                    {
+                        if (Inventory.Flare > 0)
+                        {
+                            //takes away ammo
+                            Inventory.Flare = Inventory.Flare - 1;
+                            //resets the burn timer
+                            BurnCount = 2;
+                            //subtracts the target's hp
+                            TargetHP = TargetHP - Inventory.FlareDOT;
+                            //tells you that the target attacked
+                            Console.WriteLine("the " + TargetName + " retaliates to your blow!");
+                            //subtracts your hp
+                            Inventory.Php = Inventory.Php - TargetDMG;
+                            //tells you your hp
+                            Console.WriteLine("You have " + Inventory.Php + " hp left.");
+                            //tells you the target's hp
+                            Console.WriteLine("The " + TargetName + " has " + TargetHP + "hp left");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The gun clicks uselessly!");
+                            Console.WriteLine("You don't have any more flares!");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("You don't have one of those");
+                    }
+                }
+                else if (KeyIn.Equals("quit") || KeyIn.Equals("end"))
+                {
+                    RunStat.IsRunning = false;
+                }
+                else
+                {
+                    Console.WriteLine("You stand distracted, and nearly get hit!");
+                }
+            }
+            return true;
+        }
+    }
 }

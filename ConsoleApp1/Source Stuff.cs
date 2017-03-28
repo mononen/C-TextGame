@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Game;
 
 namespace StatusStuff
 {
@@ -32,6 +33,12 @@ namespace StatusStuff
         //if you have taken the objects from these locations
         public static Boolean flareN1Taken = false;
         public static Boolean NmmBasementTaken = false;
+        public static Boolean NmmRBasementTaken = false;
+
+        //enemy health
+        public static int Nymph1HP = 35;
+        //enemy damage
+        public static int Nymph1DMG = 10;
         public static void ItemStatusPrint()
         {
             Console.WriteLine("You have:");
@@ -88,6 +95,7 @@ namespace StatusStuff
         public static String c3 = "You are in a small closet, there is a rug moved out of the way, revealing a trapdoor.";
         public static String c4 = "You are in a small closet, there is a flashilight and there is a rug moved out of the way, revealing a trapdoor.";
         public static String bd1 = "You are in the basement. It is very dark";
+        public static String bdt = "You attempt to open the trapdoor, but it is too heavy to push open.";
         public static String bl1 = "You finally see the basement clearly. There is a passage to the South and a passage to the North, you feel a slight breeze coming from the one to the North. The whole region is built out of raw concrete, and it looks very industrial. A gun lies on the desk to your left. Two magazines lie next to it.";
         public static String bl1Empty = "You finally see the basement clearly. There is a passage  to the South and a passage to the North, you feel a slight breeze coming from the one to the North. The whole region is built out of raw concrete and it looks very industrial.";
         public static String N1 = "The tunnel streatches beofore you. There is a old mining cart sitting on some abandoned tracks. Next to the tracks it says: Death to all who enter. A package of flares lie next to an open hole with spikes at the bottom. You see a skeleton hanging limply on one of the spikes. A flare gun lies on the ground just outside of the pit.";
@@ -155,7 +163,7 @@ namespace StatusStuff
                 Inventory.bottle = true;
                 Inventory.flashlight = true;
                 Inventory.rug = true;
-                //DarkBasement.desc();
+                UnderGround.DarkBasement();
             }
             if (KeyIn.Equals("ilightbasement"))
             {
@@ -164,7 +172,7 @@ namespace StatusStuff
                 Inventory.bottle = true;
                 Inventory.flashlight = true;
                 Inventory.rug = true;
-              //  LightBasement.desc();
+                UnderGround.LightBasement();
             }
             if (KeyIn.Equals("in1"))
             {
@@ -173,7 +181,7 @@ namespace StatusStuff
                 Inventory.bottle = true;
                 Inventory.flashlight = true;
                 Inventory.rug = true;
-               // N1.desc();
+                //UnderGround.N1();
 
             }
             if (KeyIn.Equals("inymph1"))
@@ -184,8 +192,12 @@ namespace StatusStuff
                 Inventory.bottle = true;
                 Inventory.rug = true;
                 Inventory.Nmm = true;
+                Inventory.NmmR = 16;
+                Inventory.NmmRBasementTaken = true;
                 Inventory.FlareGun = true;
-               // Nymph1.battle();
+                Inventory.Flare = 2;
+                Inventory.flareN1Taken = true;
+                FightSet.Fight(Inventory.Nymph1HP, Inventory.Nymph1DMG, "Nymph");
             }
             else
             {
@@ -212,8 +224,7 @@ namespace StatusStuff
         public static String KL = "KITCHEN";
         public static String TD = "TRAPDOOR";
         public static String CL = "CLOSET";
-        public static String BD = "DARK BASEMENT";
-        public static String LB = "LIGHT BASEMENT";
+        public static String BASEMENT = "BASEMENT";
         public static String TUNNEL = "TUNNEL";
         public static String CART = "CART";
         public static String RIVER = "RIVER";
