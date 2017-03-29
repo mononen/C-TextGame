@@ -547,7 +547,7 @@ namespace Game
             Console.WriteLine(Desc.river);
             String KeyIn = Input.getInput();
             String Parsed = Input.Parser(KeyIn);
-            if (KeyIn.Equals("attack"))
+            if (KeyIn.Equals("attack") || KeyIn.Equals("attack with gun") || KeyIn.Equals("attack with lever") || KeyIn.Equals("attack with flare"))
             {
                 FightSet.Fight(Inventory.Nymph1HP, Inventory.Nymph1DMG, "River Nymph");
             }
@@ -642,6 +642,10 @@ namespace Game
                             Console.WriteLine("The gun clicks uselessly!");
                             Console.WriteLine("You don't have any more flares!");
                         }
+                    }
+                    else if(KeyIn.Equals("attack with sword") || KeyIn.Equals("sword"))
+                    {
+
                     }
                     else
                     {

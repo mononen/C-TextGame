@@ -230,43 +230,43 @@ namespace StatusStuff
         //not to process anything specific
         public static String Parser(String KeyIn)
         {
-            if (KeyIn.Equals("go south") || KeyIn.Equals("south"))
+            if (KeyIn.Contains("south"))
             {
                 return "south";
             }
-            else if (KeyIn.Equals("go east") || KeyIn.Equals("east"))
+            else if (KeyIn.Contains("east"))
             {
                 return "east";
             }
-            else if (KeyIn.Equals("go north") || KeyIn.Equals("north"))
+            else if (KeyIn.Contains("north"))
             {
                 return "north";
             }
-            else if (KeyIn.Equals("go west") || KeyIn.Equals("west"))
+            else if (KeyIn.Contains("west"))
             {
                 return "west";
             }
-            else if (KeyIn.Equals("look") || KeyIn.Equals("look around"))
+            else if (KeyIn.Contains("look"))
             {
                 return "look";
             }
-            else if (KeyIn.Equals("quit") || KeyIn.Equals("end"))
+            else if (KeyIn.Contains("quit") || KeyIn.Equals("end"))
             {
                 return "quit";
             }
-            else if (KeyIn.Equals("look around") || KeyIn.Equals("look"))
+            else if (KeyIn.Contains("been"))
             {
                 return "has been";
             }
-            else if (KeyIn.Equals("inventory") || KeyIn.Equals("inv"))
+            else if (KeyIn.Contains("inventory") || KeyIn.Contains("inv"))
             {
                 return "inv";
             }
-            else if (KeyIn.Equals("clear") || KeyIn.Equals("clr"))
+            else if (KeyIn.Contains("clear") || KeyIn.Equals("clr"))
             {
                 return "clr";
             }
-            else if (KeyIn.Equals("back") || KeyIn.Equals("go back"))
+            else if (KeyIn.Contains("back"))
             {
                 return "back";
             }
