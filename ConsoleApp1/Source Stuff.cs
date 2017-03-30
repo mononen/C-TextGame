@@ -9,6 +9,8 @@ namespace StatusStuff
 {
     class Inventory
     {
+        //Troll mistake/hacker counter
+        public static int Mistake = 0;
         //player hit points
         public static int Php = 100;
         //item or tool status
@@ -18,13 +20,19 @@ namespace StatusStuff
         public static Boolean bottle = false;
         public static Boolean flashlight = false;
         public static Boolean rug = false;
+        public static Boolean lever = false;
+        public static Boolean sword = false;
         //if you have taken the item from the location
         public static Boolean FlaskKitchen = false;
         public static Boolean SackBedroom = false;
         public static Boolean BottleBedroom = false;
         public static Boolean FlashlightCloset = true;
-        public static Boolean RugCloset = true;
-
+        public static Boolean RugCloset = false;
+        public static Boolean Nymph1Sword = false;
+        public static Boolean flareN1Taken = false;
+        public static Boolean FlareGunN1Taken = false;
+        public static Boolean NmmBasementTaken = false;
+        public static Boolean NmmRBasementTaken = false;
         //nmm is the 9mm hand gun
         public static Boolean Nmm = false;
         //gun dmg
@@ -37,16 +45,17 @@ namespace StatusStuff
         public static int FlareDOT = 8;
         //count of flares
         public static int Flare = 0;
-        //if you have taken the objects from these locations
-        public static Boolean flareN1Taken = false;
-        public static Boolean FlareGunN1Taken = false;
-        public static Boolean NmmBasementTaken = false;
-        public static Boolean NmmRBasementTaken = false;
-
+        //damage of the sword
+        public static int SwordDmg = 8;
+        //damage of the lever
+        public static int LeverDmg = 5;
         //enemy health
         public static int Nymph1HP = 35;
         //enemy damage
         public static int Nymph1DMG = 10;
+        //enemy dead or not
+        public static Boolean Nymph1Alive = true;
+
         public static void ItemStatusPrint()
         {
             Console.WriteLine("You have:");
@@ -106,12 +115,12 @@ namespace StatusStuff
         public static String bdt = "You attempt to open the trapdoor, but it is too heavy to push open.";
         public static String bl1 = "You finally see the basement clearly. There is a passage to the South and a passage to the North, you feel a slight breeze coming from the one to the North. The whole region is built out of raw concrete, and it looks very industrial. A gun lies on the desk to your left. Two magazines lie next to it.";
         public static String bl1Empty = "You finally see the basement clearly. There is a passage  to the South and a passage to the North, you feel a slight breeze coming from the one to the North. The whole region is built out of raw concrete and it looks very industrial.";
-        public static String N1 = "The tunnel streatches beofore you. There is a old mining cart sitting on some abandoned tracks. Next to the tracks it says: Death to all who enter. A package of flares lie next to an open hole with spikes at the bottom. You see a skeleton hanging limply on one of the spikes. A flare gun lies on the ground just outside of the pit.";
-        public static String N1Empty = "The tunnel streatches beofore you. There is a old mining cart sitting on some abandoned tracks. Next to the tracks it says: Death to all who enter. There is an open hole with spikes at the bottom. You see a skeleton hanging limply on one of the spikes.";
+        public static String N1 = "There is a old mining cart sitting on some abandoned tracks. Next to the tracks it says: Death to all who enter. A package of flares lie next to an open hole with spikes at the bottom. You see a skeleton hanging limply on one of the spikes. A flare gun lies on the ground just outside of the pit.";
+        public static String N1Empty = "There is a old mining cart sitting on some abandoned tracks. Next to the tracks it says: Death to all who enter. There is an open hole with spikes at the bottom. You see a skeleton hanging limply on one of the spikes.";
         public static String cart = "You clamor into the cart with a bang. There is a red lever to your right.";
         public static String cartIn = "You are in a old rusted mine cart. There is a red lever to your right.";
         public static String river = "It gradually picks up speed, you try and slow down by pushing the lever back into the position it was in before but it snaps off in your hand. The cart is now out of control. Out of the gloom a river appeares, it seems to have washed a portion of the tracks away. The cart splashes into the watter and starts to sink. You see dark shadows move below you. In a panic, you leap from the cart, landing on the shore. You think that you are safe, but unfortunatly you land in front of a river nymph, who is holding a sword.";
-        public static String nymph1Dead = "You can finally relax and take a look around the room, the dead nymph's sword is glowing on the floor, covered in your blood. There is a tunnel leading in front, and behind you. ";
+        public static String nymph1Dead = "You can finally relax and take a look around the room, the dead nymph's sword is glowing on the floor, covered in your blood. There is a tunnel leading in front, and behind you. The track from where you came is too steep to climb.";
     }
     class HasVisit
     {
@@ -190,7 +199,7 @@ namespace StatusStuff
                 Inventory.bottle = true;
                 Inventory.flashlight = true;
                 Inventory.rug = true;
-                //UnderGround.N1();
+                UnderGround.N1();
 
             }
             if (KeyIn.Equals("inymph1"))
@@ -206,7 +215,7 @@ namespace StatusStuff
                 Inventory.FlareGun = true;
                 Inventory.Flare = 2;
                 Inventory.flareN1Taken = true;
-                FightSet.Fight(Inventory.Nymph1HP, Inventory.Nymph1DMG, "Nymph");
+                FightSet.Fight(Inventory.Nymph1HP, Inventory.Nymph1DMG, "Nymph", Inventory.Nymph1Alive);
             }
             else
             {
@@ -246,6 +255,14 @@ namespace StatusStuff
             {
                 return "west";
             }
+            else if (KeyIn.Contains("forward"))
+            {
+                return "forward";
+            }
+            else if (KeyIn.Contains("backward"))
+            {
+                return "backward";
+            }
             else if (KeyIn.Contains("look"))
             {
                 return "look";
@@ -272,7 +289,7 @@ namespace StatusStuff
             }
             else
             {
-                return null;
+                return "weeeee";
             }
         }
 
