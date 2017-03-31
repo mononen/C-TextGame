@@ -259,6 +259,10 @@ namespace StatusStuff
             {
                 return "west";
             }
+            else if (KeyIn.Contains("left"))
+            {
+                return "left";
+            }
             else if (KeyIn.Contains("forward"))
             {
                 return "forward";
