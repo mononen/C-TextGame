@@ -24,6 +24,8 @@ namespace StatusStuff
         public static Boolean BottleBedroom = false;
         public static Boolean FlashlightCloset = true;
         public static Boolean RugCloset = true;
+        public static Boolean rope = false;
+        public static Boolean TieRope = false;
 
         //nmm is the 9mm hand gun
         public static Boolean Nmm = false;
@@ -107,6 +109,7 @@ namespace StatusStuff
         public static String bl1 = "You finally see the basement clearly. There is a passage to the South and a passage to the North, you feel a slight breeze coming from the one to the North. The whole region is built out of raw concrete, and it looks very industrial. A gun lies on the desk to your left. Two magazines lie next to it.";
         public static String bl1Empty = "You finally see the basement clearly. There is a passage  to the South and a passage to the North, you feel a slight breeze coming from the one to the North. The whole region is built out of raw concrete and it looks very industrial.";
         public static String N1 = "The tunnel streatches beofore you. There is a old mining cart sitting on some abandoned tracks. Next to the tracks it says: Death to all who enter. A package of flares lie next to an open hole with spikes at the bottom. You see a skeleton hanging limply on one of the spikes. A flare gun lies on the ground just outside of the pit.";
+        public static String S1 = "The tunnel stops a little way away by a well. There is an old climbing rope attached to one edge. It looks unstable. There is a metal bracket set into the wall on the left side that looks pretty sturdy.";
         public static String N1Empty = "The tunnel streatches beofore you. There is a old mining cart sitting on some abandoned tracks. Next to the tracks it says: Death to all who enter. There is an open hole with spikes at the bottom. You see a skeleton hanging limply on one of the spikes.";
         public static String cart = "You clamor into the cart with a bang. There is a red lever to your right.";
         public static String cartIn = "You are in a old rusted mine cart. There is a red lever to your right.";
@@ -190,7 +193,7 @@ namespace StatusStuff
                 Inventory.bottle = true;
                 Inventory.flashlight = true;
                 Inventory.rug = true;
-                //UnderGround.N1();
+                UnderGround.N1();
 
             }
             if (KeyIn.Equals("inymph1"))
@@ -285,6 +288,7 @@ namespace StatusStuff
         public static String CL = "CLOSET";
         public static String BASEMENT = "BASEMENT";
         public static String TUNNEL = "TUNNEL";
+        public static String WELL = "WELL";
         public static String CART = "CART";
         public static String RIVER = "RIVER";
     }

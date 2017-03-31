@@ -410,6 +410,51 @@ namespace Game
                 }
             }
         }
+        public static void S1()
+        {
+
+            while (RunStat.IsRunning)
+            {
+
+                if (HasVisit.S1)
+                {
+                    Console.WriteLine(Label.WELL);
+                }
+                else
+                {
+                    Console.WriteLine(Desc.S1);
+                }
+                HasVisit.S1 = true;
+                String KeyIn = Input.getInput();
+                String Parsed = Input.Parser(KeyIn);
+                if (KeyIn.Equals("take rope") || KeyIn.Equals("rope"))
+                {
+                    Console.WriteLine("You take the rope.");
+                    Inventory.rope = true;
+                }
+                else if (Inventory.TieRope == false && KeyIn.Equals("climb") || Inventory.TieRope == false && KeyIn.Equals("climb rope"))
+                {
+                    Console.WriteLine("You fall to your death");
+                    Console.WriteLine("game over.");
+                    RunStat.IsRunning = false;
+                }
+                else if (Inventory.rope == true && KeyIn.Equals("tie rope"))
+                {
+                    Console.WriteLine("You tie the rope on the bracket.");
+                    Inventory.TieRope = true;
+                }
+                else if (Inventory.TieRope == true && KeyIn.Equals("climb"))
+                {
+                    //WellBottom();
+                }
+                else if (Parsed.Equals("quit"))
+                {
+                    RunStat.IsRunning = false;
+                }
+
+            }
+
+        }
         public static void N1()
         {
             while(RunStat.IsRunning)
