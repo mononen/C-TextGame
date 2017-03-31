@@ -452,11 +452,38 @@ namespace Game
             }
             else if (Inventory.TieRope == true && KeyIn.Equals("climb"))
             {
+                //temp troubleshooting code
+                Console.WriteLine("You go to the bottom of the rope");
                 //WellBottom();
+            }
+            else if (Parsed.Equals("look"))
+            {
+                Console.WriteLine(Desc.N1Empty);
+                S1();
+            }
+            else if (Parsed.Equals("has visit"))
+            {
+                HasVisit.Print();
+                S1();
+            }
+            else if (Parsed.Equals("inv"))
+            {
+                Inventory.ItemStatusPrint();
+                S1();
             }
             else if (Parsed.Equals("quit"))
             {
                 RunStat.IsRunning = false;
+            }
+            else if (Parsed.Equals("clr"))
+            {
+                Console.Clear();
+                GC.Collect();
+                S1();
+            }
+            else if (Parsed.Equals("back"))
+            {
+                LightBasement();
             }
             else
             {
